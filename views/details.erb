@@ -1,0 +1,10 @@
+
+<h2><%= @record.title %></h2>
+<ul>
+  <% if defined?(@record.eds_abstract) && @record.eds_abstract %><li>Abstract: <%= @record.eds_abstract %></li><% end %>
+  <li>Authors: <%= defined?(@record.eds_authors) ? @record.eds_authors : 'not available' %></li>
+  <li>Database: <%= defined?(@record.eds_database_name) ? @record.eds_database_name : 'not available' %></li>
+  <li>Year: <%= defined?(@record.eds_publication_year) ? @record.eds_publication_year : 'not available' %></li>
+</ul>
+
+APA Citation: <%= @apa_citation.items.first['data'] %>

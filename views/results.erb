@@ -1,0 +1,19 @@
+<form method='POST' action='/search-action'>
+  <input type="text" value="<%= @query %>" name="query">
+  <input type="submit" value="Search">
+</form>
+
+<h1>Query terms: <%= @results.search_terms %></h1>
+
+<h2>Results (<%= @results.stat_total_hits %>)</h2>
+<ul>
+  <% @results.records.each do |record| %>
+    <li><a href="/details?dbid=<%= record.eds_database_id %>&an=<%= record.eds_accession_number %>"><%= record.title %></a></li>
+    <ul>
+      <% if defined?(record.eds_abstract) && record.eds_abstract %><li>Abstract: <%= record.eds_abstract %></li><% end %>
+      <li>Authors: <%= defined?(record.eds_authors) ? record.eds_authors : 'not available' %></li>
+      <li>Database: <%= defined?(record.eds_database_name) ? record.eds_database_name : 'not available' %></li>
+      <li>Year: <%= defined?(record.eds_publication_year) ? record.eds_publication_year : 'not available' %></li>
+    </ul>
+  <% end %>
+</ul>
